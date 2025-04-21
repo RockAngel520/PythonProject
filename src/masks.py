@@ -1,6 +1,6 @@
 def get_mask_card_number(card_number: str) -> str:
     """Функция возвращающая маску введенного номера карты"""
-    str_card_number = str(card_number) # перевод номера карты в строк
+    str_card_number = str(card_number)  # перевод номера карты в строк
 
     if len(str_card_number) == 0:
         raise AssertionError("Номер карты не может быть пустым")

@@ -23,7 +23,14 @@ def get_date(input_date: str) -> str:
         raise IndexError("Данные не введены")
     if not input_date[8:10].isdigit() or not input_date[5:7].isdigit() or not input_date[0:4].isdigit():
         raise AttributeError("Введены некорректные данные")
-    if int(input_date[8:10]) == 0 or int(input_date[8:10]) > 31 or int(input_date[5:7]) == 0 or int(input_date[5:7]) > 12 or int(input_date[0:4]) < 1900 or int(input_date[0:4]) > 2025:
+    if (
+        int(input_date[8:10]) == 0
+        or int(input_date[8:10]) > 31
+        or int(input_date[5:7]) == 0
+        or int(input_date[5:7]) > 12
+        or int(input_date[0:4]) < 1900
+        or int(input_date[0:4]) > 2025
+    ):
         raise TypeError("Введена некорректная дата")
 
     output_date = f"{input_date[8:10]}.{input_date[5:7]}.{input_date[0:4]}"
