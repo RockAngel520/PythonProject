@@ -1,6 +1,6 @@
 import pytest
 
-from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
 @pytest.fixture
@@ -144,3 +144,34 @@ def test_transaction_descriptions_with_empty_transaction():
     generator = transaction_descriptions([])
     with pytest.raises(StopIteration):
         next(generator)
+
+
+@pytest.mark.parametrize(
+    "start, expected",
+    [
+        (1, "0000 0000 0000 0001"),
+        (2, "0000 0000 0000 0002"),
+        (3, "0000 0000 0000 0003"),
+    ],
+)
+def test_card_number_generator(start, expected):
+    generator = card_number_generator(start)
+    assert next(generator) == expected
+
+
+@pytest.mark.parametrize(
+    "start, end",
+    [
+        (-10, 2),
+        (1, -2),
+        (99999999999999991, 2),
+        (10, 99999999999999991),
+        ('start', 100),
+        (10, 'end')
+    ],
+)
+def test_card_number_generator_with_wrong_range(start, end):
+    generator = card_number_generator(start, end)
+    with pytest.raises(TypeError):
+        next(generator)
+
