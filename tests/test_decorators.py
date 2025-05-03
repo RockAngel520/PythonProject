@@ -38,7 +38,10 @@ def test_log_error_2_in_console(capsys):
 
     my_function_with_zero("a", "b")
     captured = capsys.readouterr()
-    assert captured.out == "my_function_with_zero error: unsupported operand type(s) for /: 'str' and 'str'. Inputs: ('a', 'b'), {}\n"
+    assert (
+        captured.out
+        == "my_function_with_zero error: unsupported operand type(s) for /: 'str' and 'str'. Inputs: ('a', 'b'), {}\n"
+    )
 
 
 def test_log_ok_in_file(tmp_path):
