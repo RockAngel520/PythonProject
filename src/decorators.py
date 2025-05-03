@@ -14,7 +14,7 @@ def log(filename=None):
                 if filename == None:
                     print(f"{func.__name__} ok")
                 else:
-                    with open(filename, 'a') as file:
+                    with open(filename, 'a', encoding='utf-8') as file:
                         file.write(f"{func.__name__} ok\n")
 
             except Exception as e:
@@ -22,18 +22,10 @@ def log(filename=None):
                 if filename == None:
                     print(f"{func.__name__} error: {e}. Inputs: {args}, {kwargs}")
                 else:
-                    with open(filename, 'a') as file:
+                    with open(filename, 'a', encoding='utf-8') as file:
                         file.write(f"{func.__name__} error: {e}. Inputs: {args}, {kwargs}\n")
 
             return result
 
         return wrapper
     return decorator
-
-
-if __name__ in "__main__":
-    @log(filename="mylog.txt")
-    def my_function(x, y):
-        return x / y
-
-    my_function(1, 0)
