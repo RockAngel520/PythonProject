@@ -1,0 +1,34 @@
+from functools import wraps
+
+
+def log(filename=""):
+    """
+    Декоратор, который автоматически логирирует начало и конец выполнения функции,
+    а также ее результаты или возникшие ошибки.
+    """
+
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+
+            try:
+                result = func(*args, **kwargs)
+                if filename == "":
+                    print(f"{func.__name__} ok")
+                else:
+                    with open(filename, "a", encoding="utf-8") as file:
+                        file.write(f"{func.__name__} ok\n")
+
+            except Exception as e:
+                result = None
+                if filename == "":
+                    print(f"{func.__name__} error: {e}. Inputs: {args}, {kwargs}")
+                else:
+                    with open(filename, "a", encoding="utf-8") as file:
+                        file.write(f"{func.__name__} error: {e}. Inputs: {args}, {kwargs}\n")
+
+            return result
+
+        return wrapper
+
+    return decorator
