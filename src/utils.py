@@ -2,14 +2,16 @@ import json
 
 
 def read_json_file(path: str) -> list[dict | None]:
-    '''
-    Функция, которая принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях
-    '''
+    """
+    Функция, которая принимает на вход путь до JSON-файла
+    и возвращает список словарей с данными о финансовых транзакциях
+    """
     try:
-        with open(path, 'r', encoding='utf-8') as json_file:
+        with open(path, "r", encoding="utf-8") as json_file:
             return json.load(json_file)
-    except:
-         return []
+    except (FileNotFoundError, json.JSONDecodeError, PermissionError) as e:
+        print(f"Ошибка при чтении файла {path}: {str(e)}")
+        return []
 
 
 # if __name__ == '__main__':
