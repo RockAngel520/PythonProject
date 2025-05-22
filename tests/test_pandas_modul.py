@@ -1,4 +1,4 @@
-from unittest.mock import Mock, patch, mock_open
+from unittest.mock import Mock, mock_open, patch
 
 import pytest
 
@@ -9,15 +9,15 @@ from src.pandas_modul import read_csv_file, read_excel_file
 def input_operations():
     return [
         {
-            'id': 4699552.0,
-            'state': 'EXECUTED',
-            'date': '2022-03-23T08:29:37Z',
-            'amount': 23423.0,
-            'currency_name': 'Peso',
-            'currency_code': 'PHP',
-            'from': 'Discover 7269000803370165',
-            'to': 'American Express 1963030970727681',
-            'description': 'Перевод с карты на карту'
+            "id": 4699552.0,
+            "state": "EXECUTED",
+            "date": "2022-03-23T08:29:37Z",
+            "amount": 23423.0,
+            "currency_name": "Peso",
+            "currency_code": "PHP",
+            "from": "Discover 7269000803370165",
+            "to": "American Express 1963030970727681",
+            "description": "Перевод с карты на карту",
         }
     ]
 
@@ -51,9 +51,9 @@ def test_read_csv_success():
 
     mock_file = mock_open(read_data=csv_data)
 
-    with patch('builtins.open', mock_file):
-        result = read_csv_file('test_file.csv')
+    with patch("builtins.open", mock_file):
+        result = read_csv_file("test_file.csv")
 
         assert len(result) == 2
-        assert result[0] == {'id': 650703, 'state': 'EXECUTED'}
-        assert result[1] == {'id': 593027, 'state': 'CANCELED'}
+        assert result[0] == {"id": 650703, "state": "EXECUTED"}
+        assert result[1] == {"id": 593027, "state": "CANCELED"}

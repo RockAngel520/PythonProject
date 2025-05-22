@@ -8,8 +8,8 @@ def read_csv_file(path: str) -> list[dict | None]:
     """
     try:
         with open(path, "r", encoding="utf-8") as csv_file:
-            df = pd.read_csv(csv_file, delimiter=';')
-            return df.to_dict(orient='records')
+            df = pd.read_csv(csv_file, delimiter=";")
+            return df.to_dict(orient="records")
     except (FileNotFoundError, PermissionError) as e:
         print(f"Ошибка при чтении файла {path}: {str(e)}")
         return []
@@ -23,7 +23,7 @@ def read_excel_file(path: str) -> list[dict | None]:
     try:
         with open(path, "rb") as excel_file:
             df = pd.read_excel(excel_file)
-            return df.to_dict(orient='records')
+            return df.to_dict(orient="records")
     except (FileNotFoundError, PermissionError) as e:
         print(f"Ошибка при чтении файла {path}: {str(e)}")
         return []
