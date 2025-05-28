@@ -1,10 +1,17 @@
 import re
+from collections import Counter
 
 
 def search_string_in_transactions(transactions: list[dict], string: str) -> list[dict]:
     """Функция сортировки банковских операций по строке."""
-    new_transactions = [transaction for transaction in transactions if re.search(string, transaction['description'], flags=re.IGNORECASE)]
-    return new_transactions
+    search_transactions = [transaction for transaction in transactions if re.search(string, transaction['description'], flags=re.IGNORECASE)]
+    return search_transactions
+
+
+def count_categories(transactions: list[dict], categories: list) -> dict:
+    """Функция подсчета операций по категориям."""
+    counted_categories = [transaction['description'] for transaction in transactions if transaction['description'] in categories]
+    return dict(Counter(counted_categories))
 
 
 # my_transactions = [
@@ -16,8 +23,10 @@ def search_string_in_transactions(transactions: list[dict], string: str) -> list
 # 'currency_code': 'PHP', 'from': 'Discover 7269000803370165', 'to': 'American Express 1963030970727681',
 # 'description': 'Перевод с карты на карту'}
 # ]
+# categories = ['Перевод с карты на карту', 'Перевод со счета на счет']
 # my_string = 'СЧЕТ'
 #
 #
 # if __name__ == '__main__':
+#     print(count_categories(my_transactions, categories))
 #     print(search_string_in_transactions(my_transactions, my_string))
