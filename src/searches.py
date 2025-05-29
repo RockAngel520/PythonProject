@@ -4,13 +4,19 @@ from collections import Counter
 
 def search_string_in_transactions(transactions: list[dict], string: str) -> list[dict]:
     """Функция сортировки банковских операций по строке."""
-    search_transactions = [transaction for transaction in transactions if re.search(string, transaction['description'], flags=re.IGNORECASE)]
+    search_transactions = [
+        transaction
+        for transaction in transactions
+        if re.search(string, transaction["description"], flags=re.IGNORECASE)
+    ]
     return search_transactions
 
 
 def count_categories(transactions: list[dict], categories: list) -> dict:
     """Функция подсчета операций по категориям."""
-    counted_categories = [transaction['description'] for transaction in transactions if transaction['description'] in categories]
+    counted_categories = [
+        transaction["description"] for transaction in transactions if transaction["description"] in categories
+    ]
     return dict(Counter(counted_categories))
 
 
