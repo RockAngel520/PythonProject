@@ -9,6 +9,7 @@ def read_csv_file(path: str) -> list[dict | None]:
     try:
         with open(path, "r", encoding="utf-8") as csv_file:
             df = pd.read_csv(csv_file, delimiter=";")
+            df = df.where(pd.notnull(df), None)  # Заменяем nan на None
             return df.to_dict(orient="records")
     except (FileNotFoundError, PermissionError) as e:
         print(f"Ошибка при чтении файла {path}: {str(e)}")
@@ -23,6 +24,7 @@ def read_excel_file(path: str) -> list[dict | None]:
     try:
         with open(path, "rb") as excel_file:
             df = pd.read_excel(excel_file)
+            df = df.where(pd.notnull(df), None)  # Заменяем nan на None
             return df.to_dict(orient="records")
     except (FileNotFoundError, PermissionError) as e:
         print(f"Ошибка при чтении файла {path}: {str(e)}")
